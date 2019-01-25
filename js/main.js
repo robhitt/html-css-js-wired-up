@@ -1,23 +1,31 @@
-// document.addEventListener("DOMContentLoaded", function(){
-//   // Handler when the DOM is fully loaded
-// });
-
-
-
 "use strict";
 
 window.addEventListener('load', app);
 
 function app() {
-  // const url = "ADD_URL_ENDPOINT_HERE";
-  // fetch(url, {
-  //     method: "GET"
-  //   })
-  //   .then(response => response.json())
-  //   .then(response => renderPage(response))
-  //   .catch(err => console.log(err));
-}
+  const countDown = () => {
+    if (counter <= 1) {
+      clearInterval(intervalId);
+      body.innerHTML = '';
+      body.classList.add('sad-puppy')
+    }
+    counter--;
+    timer.innerHTML = counter;
+  }
 
-function renderPage(response) {
-  console.log("Hello, World!");
+  const stopInterval = () => {
+    clearInterval(intervalId);
+    body.innerHTML = '';
+    body.classList.add('puppy')
+  }
+
+  const body = document.querySelector('body'),
+        button = document.querySelector('.btn'),
+        intervalId = setInterval(countDown, 1000);
+  
+  let counter = 5,
+      timer = document.querySelector('.timer');
+  
+  timer.innerHTML = counter;
+  button.addEventListener('click', stopInterval);
 }
